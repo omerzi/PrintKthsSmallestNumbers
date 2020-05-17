@@ -140,12 +140,16 @@
   <ItemGroup>
     <ClCompile Include="BSTree.cpp" />
     <ClCompile Include="BSTreeNode.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Person.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BSTree.h" />
     <ClInclude Include="BSTreeNode.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListNode.h" />
     <ClInclude Include="Person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
