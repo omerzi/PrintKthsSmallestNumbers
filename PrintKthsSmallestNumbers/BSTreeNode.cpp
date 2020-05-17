@@ -2,11 +2,11 @@
 #include "Person.h"
 #include <iostream>
 using namespace std;
-BSTreeNode::BSTreeNode(Person * i_PersonData, BSTreeNode * i_i_Left, BSTreeNode * i_i_Right)
+BSTreeNode::BSTreeNode(Person * i_PersonData, BSTreeNode * i_Left, BSTreeNode * i_Right)
 {
 	this->m_PersonData = i_PersonData;
-	this->m_Left = i_i_Left;
-	this->m_Right = i_i_Right;
+	this->m_Left = i_Left;
+	this->m_Right = i_Right;
 }
 
 Person * BSTreeNode::GetData() const
