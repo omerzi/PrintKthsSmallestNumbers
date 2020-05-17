@@ -1,5 +1,7 @@
 #include "BSTreeNode.h"
 #include "Person.h"
+#include <iostream>
+using namespace std;
 BSTreeNode::BSTreeNode(Person * i_PersonData, BSTreeNode * i_i_Left, BSTreeNode * i_i_Right)
 {
 	this->m_PersonData = i_PersonData;

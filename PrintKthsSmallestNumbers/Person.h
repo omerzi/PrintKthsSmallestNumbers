@@ -7,7 +7,6 @@ class Person {
 private: // members:
 	int			 m_ID;
 	string       m_Name;
-
 public: // c'tor:
 	Person(int i_ID, string i_Name);
 public: //methods:

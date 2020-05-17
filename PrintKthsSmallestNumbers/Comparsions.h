@@ -1,0 +1,29 @@
+#ifndef __COMPARSIONS_H
+#define __COMPARSIONS_H
+
+class List;
+class Person;
+class BSTree;
+
+class Comparsions
+{
+private: //members:
+	Person ** m_PersonArray;
+	int m_ArraySize;
+public: //c'tor & d'tor
+	Comparsions(int i_ArraySize);
+	~Comparsions();
+public: //static methods:
+	static void ReadPersons();
+	//static void RunComparsions()
+public://methods:
+	//int NaivePrint(Person** i_PersonArray, int n, int k);
+	//int BSTPrint(Person** i_PersonArray, int n, int k);
+	//int PrintBySort(Person** i_PersonArray, int n, int k);
+	int Partition(Person ** i_PersonArray, int i_StartingIndex, int i_EndingIndex);
+	void Quicksort(Person ** i_PersonArray, int i_StartingIndex, int i_EndingIndex);
+};
+#endif // !__COMPARSIONS_H
+
+
+

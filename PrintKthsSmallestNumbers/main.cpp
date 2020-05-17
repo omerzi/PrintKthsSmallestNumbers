@@ -1,6 +1,4 @@
-using namespace std;
-#include <iostream>
-#include <stdlib.h>
+#include "Comparsions.h"
 
 // ------------------------------------------------------------------------------//
 // A Data Structures course project in C++, 
@@ -15,5 +13,6 @@ using namespace std;
 
 int main()
 {
-	//Run() method;
+	Comparsions::ReadPersons();
+	//cout
 }

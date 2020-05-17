@@ -1,7 +1,6 @@
 #ifndef BSTreeNode__H
 #define BSTreeNode__H
-#include <iostream>
-using namespace std;
+
 class Person;
 
 class BSTreeNode {
