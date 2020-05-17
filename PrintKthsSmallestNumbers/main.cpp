@@ -1,8 +1,5 @@
 #include "Comparsions.h"
 
-//eran changes !#!@#@!$^#%^%&$%^%
-
-//change number 2
 
 // ------------------------------------------------------------------------------//
 // A Data Structures course project in C++, 
