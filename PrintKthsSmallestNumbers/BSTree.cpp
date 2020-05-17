@@ -1,222 +1,236 @@
 #include "BSTree.h"
 #include "BSTreeNode.h"
 #include "Person.h"
-BSTreeNode * BSTree::Find(Type item)
+
+BSTreeNode * BSTree::Find(Type i_KeyID)
 { //find the node of by the type given
-	BSTreeNode * temp = this->root;
-	while (temp != nullptr)
+	BSTreeNode * currentNode = this->m_Root;
+	while(currentNode != nullptr && currentNode->GetData()->GetID() != i_KeyID)
 	{
-		if (item == temp->data->getID())
-			return temp;
-		else if (item < temp->data->getID())
-			temp = temp->left;
-		else
-			temp = temp->right;
+		if(i_KeyID < currentNode->m_PersonData->GetID())
+		{
+			currentNode = currentNode->m_Left;
+		}
+		else if(i_KeyID > currentNode->m_PersonData->GetID())
+		{
+			currentNode = currentNode->m_Right;
+		}
 	}
-	return nullptr;
+
+	return currentNode;
 }
 
-void BSTree::Insert(Person * pers,int & NumComp)
+void BSTree::Insert(Person * i_Person, int & NumComp)
 {
 	NumComp++; // a comparsion made
-	if (this->Find(pers->getID()) != nullptr)
+	if(this->Find(i_Person->GetID()) != nullptr)
 	{
 		cout << "Error: key already exists" << endl;
-		return;
 	}
-	BSTreeNode * temp = this->root; //current node in tree
-	BSTreeNode * parent = nullptr; //Parent of temp
-	BSTreeNode * newnode; // new allocated node
-
-	while (temp != nullptr)
+	else
 	{
-		parent = temp;
-		parent->numOfSons++;
-		NumComp++; // a comparsion made
-		if (pers->getID() < temp->data->getID())
+		BSTreeNode* currentNode = this->m_Root;
+		BSTreeNode* parentNode = nullptr;
+		BSTreeNode* newNode;
+		while(currentNode != nullptr)
 		{
-			temp = temp->left;
+			parentNode = currentNode;
+
+			NumComp++; // a comparsion made
+			if(i_Person->GetID() < currentNode->m_PersonData->GetID())
+			{
+				currentNode = currentNode->m_Left;
+			}
+			else
+			{
+				currentNode = currentNode->m_Right;
+			}
+		}
+
+		newNode = new BSTreeNode(i_Person, nullptr, nullptr);
+		NumComp++; // a comparsion made
+		if(parentNode == nullptr) // insert newNode as root
+		{
+			this->m_Root = newNode;
+		}
+		else if(i_Person->GetID() < parentNode->m_PersonData->GetID())
+		{
+			NumComp++; // a comparsion made
+			parentNode->m_Left = newNode; //insert newNode as left child
 		}
 		else
-			temp = temp->right;
-	}
-	newnode = new BSTreeNode(pers, 0,nullptr, nullptr);
-	NumComp++; // a comparsion made
-	if (parent == nullptr) // insert newnode as root
-		this->root = newnode;
-	else if (pers->getID() < parent->data->getID())
-	{
-		NumComp++; // a comparsion made
-		parent->left = (newnode); //insert newnode as left child
-	}
-	else
-	{
-		NumComp++; // a comparsion made
-		parent->right = (newnode); // insert newnode as right child
+		{
+			NumComp++; // a comparsion made
+			parentNode->m_Right = newNode; // insert newNode as right child
+		}
 	}
 }
 
-void BSTree::Delete(Type item)
+void BSTree::Delete(BSTreeNode * i_Node, int i_KeyID)
 {
-	BSTreeNode * parent = parentFind(item);
-	BSTreeNode * child = Find(item);
-	// maximum one child :
-	if (child->left == nullptr && child->right != nullptr)
+	if(i_Node != nullptr)
 	{
-		if (parent->left == child)
+		if(i_Node->GetData()->GetID() < i_KeyID)
 		{
-			parent->left = child->right;
+			Delete(i_Node->m_Left, i_KeyID);
 		}
-		else parent->right = child->right;
-		child->right = nullptr;
-		delete child;
-	} 
-	else if (child->right == nullptr && child->left != nullptr)
-	{
-		if (parent->left == child)
+		else if(i_Node->GetData()->GetID() > i_KeyID)
 		{
-			parent->left = child->left;
+			Delete(i_Node->m_Right, i_KeyID);
 		}
-		else parent->right = child->left;
-		child->left = nullptr;
-		delete child;
-	}
-	else if (child->left == nullptr && child->right == nullptr)
-	{
-		if (parent->left == child)
+		else if(i_Node->m_Left != nullptr && i_Node->m_Right != nullptr)
 		{
-			parent->left = nullptr;
+			BSTreeNode* minNode = Min(i_Node->m_Right);
+			i_Node->m_PersonData = minNode->m_PersonData;
+			Delete(i_Node->m_Right, i_Node->GetData()->GetID());
 		}
-		else parent->right = nullptr;
-		delete child;
-	}
-	//two children:
-	BSTree childTree(child->left);
-	BSTreeNode* maxInChildTree = childTree.Max();
-	child->data = maxInChildTree->data;
-	if (maxInChildTree->left == nullptr && maxInChildTree->right != nullptr)
-	{
-		maxInChildTree = maxInChildTree->right;
-	}
-	else if (maxInChildTree->right == nullptr && maxInChildTree->left != nullptr)
-	{
-		maxInChildTree = maxInChildTree->left;
-	}
-	else if (maxInChildTree->left == nullptr && maxInChildTree->right == nullptr)
-	{
-		delete maxInChildTree;
+		else
+		{
+			BSTreeNode* tempNode = i_Node;
+			if(i_Node->m_Left == nullptr)
+			{
+				i_Node = i_Node->m_Right;
+			}
+			else if (i_Node->m_Right == nullptr)
+			{
+				i_Node = i_Node->m_Left;
+			}
+
+			delete tempNode;
+		}
 	}
 }
 
-void BSTree::makeEmpty(BSTreeNode * root)
+void BSTree::MakeEmpty(BSTreeNode * i_Root)
 {
-	if (root == nullptr)
-		return; // Tree is empty
-	else
+	if(i_Root != nullptr)
 	{
-		if (root->left != nullptr)
+		if (i_Root->m_Left != nullptr)
 		{
-			makeEmpty(root->left);
+			MakeEmpty(i_Root->m_Left);
 		}
-		if (root->right != nullptr)
+		if (i_Root->m_Right != nullptr)
 		{
-			makeEmpty(root->right);
+			MakeEmpty(i_Root->m_Right);
 		}
-		delete root;
+		delete i_Root;
 	}
-	return;
 }
 
-bool BSTree::isEmpty()
+bool BSTree::IsEmpty()
 {
-	if (this->root == nullptr)
-		return true;
-	return false;
+	return this->m_Root == nullptr;
 }
 
-BSTreeNode * BSTree::parentFind(Type item)
+BSTreeNode * BSTree::ParentFind(Type i_KeyID)
 {
 	//find the parent of node by the type given
-	BSTreeNode * temp = this->root;
-	while (temp != nullptr)
+	BSTreeNode * tempNode = this->m_Root;
+	while(tempNode != nullptr)
 	{
-		if (item == temp->left->data->getID())
-			return temp;
-		else if (item == temp->right->data->getID())
-			return temp;
-		else if (item < temp->data->getID())
-			temp = temp->left;
+		if(i_KeyID == tempNode->m_Left->GetData()->GetID())
+		{
+			return tempNode;
+		}
+		else if(i_KeyID == tempNode->m_Right->m_PersonData->GetID())
+		{
+			return tempNode;
+		}
+		else if(i_KeyID < tempNode->m_PersonData->GetID())
+		{
+			tempNode = tempNode->m_Left;
+		}
 		else
-			temp = temp->right;
+		{
+			tempNode = tempNode->m_Right;
+		}
 	}
+
 	return nullptr;
 }
 
-Type BSTree::Min()
+BSTreeNode * BSTree::Min(BSTreeNode * i_Node)
 { //return the minimum value in the tree
-	if (root->left == nullptr)
-		return root->data->getID();
-	else
+	if(i_Node != nullptr && i_Node->m_Left != nullptr)
 	{
-		root = root->left;
-		this->Min();
+		Min(i_Node->m_Left);
 	}
+	
+	return i_Node;
 }
 
-BSTreeNode* BSTree::Max()
+BSTreeNode * BSTree::Max(BSTreeNode* i_Node)
 { // return the max value in the tree
-	if (root->right == nullptr)
-		return root;
-	else
+	if(i_Node != nullptr && i_Node->m_Right != nullptr)
 	{
-		root = root->right;
-		this->Max();
+		Max(i_Node->m_Right);
 	}
+
+	return i_Node;
 }
 
 void BSTree::PrintTree()
 {
 	//prints the tree in Inorder
-	if (this->root != nullptr)
-		this->root->inorder();
+	if(this->m_Root != nullptr)
+	{
+		this->m_Root->Inorder();
+	}
 }
 
-BSTreeNode * BSTree::getRoot() const
+BSTreeNode * BSTree::GetRoot() const
 {
-	return this->root;
+	return this->m_Root;
 }
-
-BSTreeNode * BSTree::FindK(BSTreeNode * node, int k,int & NumComp)
-{
-	//this function recieve a tree node and return a k'ths node by ID value
-	NumComp++; // a comparsion made
-	if (node == nullptr)
-		return nullptr; // didn't find K'ths node
-	NumComp++; // a comparsion made
-	if (k > node->numOfSons + 1)
-		return nullptr;
-	int NleavesLeft = 0;
-	NumComp++; // a comparsion made
-	if (node->left != nullptr)
-		NleavesLeft = node->left->numOfSons+1;
-	NumComp++; // a comparsion made
-	if (k == NleavesLeft+1)
-	{
-		// found the node
-		return node;
-	}
-	NumComp++; // a comparsion made
-	if ( node->left==nullptr || NleavesLeft+1 < k)
-	{
-		NumComp++; // a comparsion made
-		if (node->left == nullptr)
-			FindK(node->right, k - 1,NumComp);
-		else
-			FindK(node->right, k - NleavesLeft - 1,NumComp);
-	}
-	else
-	{
-		FindK(node->left, k,NumComp);
-	}
-
-}
+ 
+//void BSTree::Delete(Type i_KeyID);
+//{
+//	BSTreeNode* parentNode = ParentFind(i_KeyID);
+//	BSTreeNode* childNode = Find(i_KeyID);
+//	// maximum one child :
+//	if (childNode->m_ == nullptr && childNode->i_Right != nullptr)
+//	{
+//		if (parent->i_Left == childNode)
+//		{
+//			parent->i_Left = childNode->i_Right;
+//		}
+//		else parent->i_Right = childNode->i_Right;
+//		childNode->i_Right = nullptr;
+//		delete childNode;
+//	}
+//	else if (childNode->i_Right == nullptr && childNode->i_Left != nullptr)
+//	{
+//		if (parent->i_Left == childNode)
+//		{
+//			parent->i_Left = childNode->i_Left;
+//		}
+//		else parent->i_Right = childNode->i_Left;
+//		childNode->i_Left = nullptr;
+//		delete child;
+//	}
+//	else if (childNode->i_Left == nullptr && childNode->i_Right == nullptr)
+//	{
+//		if (parent->i_Left == child)
+//		{
+//			parent->i_Left = nullptr;
+//		}
+//		else parent->i_Right = nullptr;
+//		delete childNode;
+//	}
+//	//two children:
+//	BSTree childTree(childNode->i_Left);
+//	BSTreeNode* maxInChildTree = childTree.Max();
+//	childNode->m_PersonData = maxInChildTree->m_PersonData;
+//	if (maxInChildTree->i_Left == nullptr && maxInChildTree->i_Right != nullptr)
+//	{
+//		maxInChildTree = maxInChildTree->i_Right;
+//	}
+//	else if (maxInChildTree->i_Right == nullptr && maxInChildTree->i_Left != nullptr)
+//	{
+//		maxInChildTree = maxInChildTree->i_Left;
+//	}
+//	else if (maxInChildTree->i_Left == nullptr && maxInChildTree->i_Right == nullptr)
+//	{
+//		delete maxInChildTree;
+//	}
+//}

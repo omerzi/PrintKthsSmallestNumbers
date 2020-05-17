@@ -4,19 +4,18 @@
 using namespace std;
 
 class Person {
-private:
-	unsigned int m_ID;
+private: // members:
+	int m_ID;
 	string       m_Name;
-public:
+
+public: // c'tor:
 	Person(int i_ID, string i_Name);
-	Person(Person & other);
-	~Person();
-	const int getID() const;
-	char * getName() const;
-	void setID(const int id);
-	void setName(const char * name);
-public:
-	void operator=(const Person & other);
+
+public: //methods:
+	int      GetID() const;
+	string & GetName();
+	void     SetID(int i_ID);
+	void     SetName(const string & i_Name);
 
 };
 #endif // !PERSON_H

@@ -1,46 +1,26 @@
 #include "BSTreeNode.h"
-BSTreeNode::BSTreeNode(Person * data, int numOfSons, BSTreeNode * left, BSTreeNode * right)
+#include "Person.h"
+BSTreeNode::BSTreeNode(Person * i_PersonData, BSTreeNode * i_i_Left, BSTreeNode * i_i_Right)
 {
-	this->data = data;
-	this->left = left;
-	this->right = right;
-	this->numOfSons = numOfSons;
+	this->m_PersonData = i_PersonData;
+	this->m_Left = i_i_Left;
+	this->m_Right = i_i_Right;
 }
 
-BSTreeNode::~BSTreeNode()
+Person * BSTreeNode::GetData() const
 {
-	delete this->left;
-	delete this->right;
+	return this->m_PersonData;
 }
 
-Person * BSTreeNode::getData() const
+void BSTreeNode::Inorder()
 {
-	return this->data;
-}
-
-void BSTreeNode::inorder()
-{
-	if (this->left != nullptr)
-		this->left->inorder();
-	cout << this->data;
-	if (this->right != nullptr)
-		this->right->inorder();
-}
-
-void BSTreeNode::preorder()
-{
-	cout << this->data;
-	if (this->left != nullptr)
-		this->left->preorder();
-	if (this->right != nullptr)
-		this->right->preorder();
-}
-
-void BSTreeNode::postorder()
-{
-	if (this->left != nullptr)
-		this->left->postorder();
-	if (this->right != nullptr)
-		this->right->postorder();
-	cout << this->data;
+	if (this->m_Left != nullptr)
+	{
+		this->m_Left->Inorder();
+	}
+	cout << this->m_PersonData->GetID() << " " << this->m_PersonData->GetName();
+	if (this->m_Right != nullptr)
+	{
+		this->m_Right->Inorder();
+	}
 }

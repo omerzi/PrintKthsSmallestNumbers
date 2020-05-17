@@ -1,46 +1,28 @@
 #include "Person.h"
-#include <string.h>
 #pragma warning(disable:4996)
 
 Person::Person(int i_ID, string i_Name)
 {
-	this->p_ID = ID;
-	this->p_name = strdup(name);
-}
-Person::Person(Person & other)
-{
-	this->p_ID = other.p_ID;
-	this->p_name = strdup(other.p_name);
-}
-//----------------------------------------------------//
-Person::~Person()
-{
-	delete[] p_name;
+	this->m_ID = i_ID;
+	this->m_Name = i_Name;
 }
 
-const int Person::getID() const
+int Person::GetID() const
 {
-	return this->p_ID;
+	return this->m_ID;
 }
 
-char * Person::getName() const
+string & Person::GetName()
 {
-	return this->p_name;
+	return this->m_Name;
 }
 
-void Person::setID(const int id)
+void Person::SetID(int i_ID)
 {
-	this->p_ID = id;
+	this->m_ID = i_ID;
 }
 
-void Person::setName(const char * name)
+void Person::SetName(const string & i_Name)
 {
-	this->p_name = strdup(name);
+	this->m_Name = i_Name;
 }
-
-void Person::operator=(const Person & other)
-{
-	this->p_ID = other.p_ID;
-	this->p_name = strdup(other.p_name);
-}
-

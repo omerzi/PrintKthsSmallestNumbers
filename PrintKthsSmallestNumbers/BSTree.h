@@ -5,23 +5,24 @@ typedef int Type;
 class Person;
 
 class BSTree {
-private:
-	BSTreeNode * root;
-public:
-	BSTree() {this->root = nullptr; };
-	BSTree(BSTreeNode * root) { this->root = root; };
-	~BSTree() { delete this->root; };
-	BSTreeNode * Find(Type item);
-	void Insert(Person * pers, int & NumComp);
-	void Delete(Type item);
-	void makeEmpty(BSTreeNode * root);
-	bool isEmpty();
-	BSTreeNode * parentFind(Type item);
-	Type Min();
-	BSTreeNode* Max();
-	void PrintTree();
-	BSTreeNode * getRoot() const;
-	BSTreeNode * FindK(BSTreeNode * node, int k,int&NumComp);
-	friend class BSTreeNode;
+friend class BSTreeNode;
+
+private: //members:
+	BSTreeNode * m_Root;
+public: //c'tors:
+	BSTree() {this->m_Root = nullptr; };
+	BSTree(BSTreeNode * i_Root) { this->m_Root = i_Root; };
+
+public: //methods
+	BSTreeNode * Find(Type i_KeyID);
+	BSTreeNode*  GetRoot() const;
+	BSTreeNode*  ParentFind(Type i_KeyID);
+	void         Insert(Person * i_Person, int & NumComp);
+	void         Delete(BSTreeNode* i_Node, int i_KeyID);
+	void         MakeEmpty(BSTreeNode * i_Root);
+	void         PrintTree();
+	bool         IsEmpty();
+	BSTreeNode * Min(BSTreeNode* i_Node);
+	BSTreeNode * Max(BSTreeNode* i_Node);
 };
 #endif // !BSTree_H

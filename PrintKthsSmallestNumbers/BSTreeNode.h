@@ -6,19 +6,17 @@ class Person;
 
 class BSTreeNode {
 
-private:
-	int numOfSons;
-	Person * data;
-	BSTreeNode * left, *right;
-public:
-	BSTreeNode() {this->numOfSons = 0;	};
-	BSTreeNode(Person * data, int numOfSons,BSTreeNode * left, BSTreeNode * right);
-	~BSTreeNode() ;
-	Person * getData() const;
-	void inorder();
-	void preorder();
-	void postorder();
-	friend class BSTree;
+friend class BSTree;
 
+private: // members:
+	Person * m_PersonData;
+	BSTreeNode * m_Left, * m_Right;
+
+public: // c'tor
+	BSTreeNode(Person * i_PersonData, BSTreeNode * i_Left, BSTreeNode * i_Right);
+
+public: // methods:
+	Person * GetData() const;
+	void     Inorder();
 };
 #endif // !BSTreeNode_H#
