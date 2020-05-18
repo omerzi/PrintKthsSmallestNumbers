@@ -45,23 +45,24 @@ ListNode * List::Last()
 ListNode * List::FindPrevNode(ListNode * i_Node)
 {
 	ListNode * currentNode = this->m_Head;
-	while (currentNode)
+	while(currentNode)
 	{
-		if (currentNode->m_NextNode == i_Node)
+		if(currentNode->m_NextNode == i_Node)
 		{
 			return currentNode;
 		}
 		currentNode = currentNode->m_NextNode;
 	}
+
 	return nullptr;
 }
 
 ListNode * List::FindNode(int i_ID)
 {
 	ListNode * currentNode = this->m_Head;
-	while (currentNode)
+	while(currentNode)
 	{
-		if (currentNode->m_PersonData->GetID() == i_ID)
+		if(currentNode->m_PersonData->GetID() == i_ID)
 		{
 			return currentNode;
 		}
@@ -73,7 +74,7 @@ ListNode * List::FindNode(int i_ID)
 
 void List::InsertAfter(ListNode * i_Node, ListNode* i_NodeToInsertAfter)
 {
-	if (IsEmpty())
+	if(IsEmpty())
 	{
 		this->m_Head = this->m_Tail = i_Node;
 	}
@@ -82,17 +83,16 @@ void List::InsertAfter(ListNode * i_Node, ListNode* i_NodeToInsertAfter)
 		ListNode* tempNode = i_NodeToInsertAfter->GetNextListNode();
 		i_NodeToInsertAfter->m_NextNode = i_Node;
 		i_Node->m_NextNode = tempNode;
-		if (i_Node == this->m_Tail)
+		if(i_Node == this->m_Tail)
 		{
 			this->m_Tail = i_NodeToInsertAfter;
 		}
 	}
 }
 
-
 void List::DeleteNode(ListNode * i_Node)
 {
-	if (this->m_Head == i_Node)
+	if(this->m_Head == i_Node)
 	{
 		this->m_Head = i_Node->m_NextNode;
 		i_Node->m_NextNode = nullptr;
@@ -102,13 +102,16 @@ void List::DeleteNode(ListNode * i_Node)
 		ListNode * prevNode = FindPrevNode(i_Node);
 		prevNode->m_NextNode = i_Node->m_NextNode;
 		i_Node->m_NextNode = nullptr;
-		if (this->m_Tail == i_Node)
+		if(this->m_Tail == i_Node)
 		{
 			this->m_Tail = prevNode;
 		}
 	}
 	if (this->m_Head == nullptr)
+	{
 		this->m_Head = this->m_Tail = nullptr;
+	}
+
 	delete i_Node;
 }
 
@@ -116,7 +119,7 @@ int List::Size()
 {
 	int listSize = 0;
 	ListNode * currentNode = this->m_Head;
-	while (!IsEmpty())
+	while(!IsEmpty())
 	{
 		listSize++;
 		currentNode = currentNode->m_NextNode;
@@ -124,33 +127,33 @@ int List::Size()
 	return listSize;
 }
 
-void List::sortedInsert(ListNode * i_newNode)
+void List::sortedInsert(ListNode * i_NewNode)
 {
 	ListNode* current;
-	int inputPersonID = i_newNode->GetPerson()->GetID();
-	if (this->m_Head == NULL || m_Head->GetPerson()->GetID() >= inputPersonID)
+	int inputPersonID = i_NewNode->GetPerson()->GetID();
+	if(this->m_Head == NULL || m_Head->GetPerson()->GetID() >= inputPersonID)
 	{
-		if (m_Head == NULL)
+		if(m_Head == NULL)
 		{
-			this->m_Tail = i_newNode;
+			this->m_Tail = i_NewNode;
 		}
-		i_newNode->m_NextNode = m_Head;
-		this->m_Head = i_newNode;
-		
-		
+
+		i_NewNode->m_NextNode = m_Head;
+		this->m_Head = i_NewNode;
 	}
 	else
 	{
 		current = m_Head;
-		while (current->GetNextListNode() != NULL && current->GetNextListNode()->GetPerson()->GetID() < inputPersonID)
+		while(current->GetNextListNode() != NULL && current->GetNextListNode()->GetPerson()->GetID() < inputPersonID)
 		{
 			current = current->GetNextListNode();
 		}
-		i_newNode->m_NextNode = current->GetNextListNode();
-		current->m_NextNode = i_newNode;
-		if (i_newNode->GetNextListNode() == nullptr)
+
+		i_NewNode->m_NextNode = current->GetNextListNode();
+		current->m_NextNode = i_NewNode;
+		if (i_NewNode->GetNextListNode() == nullptr)
 		{
-			m_Tail = i_newNode;
+			m_Tail = i_NewNode;
 		}
 	}
 }

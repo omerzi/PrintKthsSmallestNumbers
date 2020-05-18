@@ -9,7 +9,7 @@ class Comparsions
 {
 private: //members:
 	Person ** m_PersonArray;
-	int m_ArraySize;
+	int		  m_ArraySize;
 public: //c'tor & d'tor
 	Comparsions(int i_ArraySize);
 	~Comparsions();

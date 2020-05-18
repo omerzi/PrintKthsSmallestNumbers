@@ -11,16 +11,16 @@ public: //constructors:
 	 List();
 	~List();
 public: // methods:
-	void   MakeEmpty();
-	bool   IsEmpty();
+	void	   MakeEmpty();
+	void	   InsertAfter(ListNode* i_Node, ListNode* i_NodeToInsertAfter);
+	void	   DeleteNode(ListNode* i_Node);
+	void	   sortedInsert(ListNode* i_NewNode);
+	bool	   IsEmpty();
 	ListNode * First();
 	ListNode * Last();
 	ListNode * FindPrevNode(ListNode* i_Node);
 	ListNode * FindNode(int i_ID);
-	void   InsertAfter(ListNode* i_Node, ListNode* i_NodeToInsertAfter);
-	void   DeleteNode(ListNode* i_Node);
-	int    Size();
-	void sortedInsert(ListNode* i_newNode);
+	int		   Size();
 };
 #endif // !__LIST_H
 

@@ -4,9 +4,7 @@
 class Person;
 
 class BSTreeNode {
-
 friend class BSTree;
-
 private: // members:
 	Person *     m_PersonData;
 	BSTreeNode * m_Left, * m_Right;

@@ -11,7 +11,7 @@ public: //constructors:
      ListNode(Person * i_PersonData, ListNode * i_NextNode = nullptr);
      ~ListNode();
 public://methods:
-     Person *       GetPerson() const;
+     Person   *    GetPerson() const;
      ListNode *    GetNextListNode();
 };
 #endif 
