@@ -1,7 +1,7 @@
 #include "Person.h"
 #pragma warning(disable:4996)
 
-Person::Person(int i_ID, string i_Name)
+Person::Person(int i_ID, const string & i_Name)
 {
 	this->m_ID = i_ID;
 	this->m_Name = i_Name;

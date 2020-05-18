@@ -15,14 +15,14 @@ public: //c'tors:
 
 public: //methods
 	BSTreeNode * Find(Type i_KeyID);
-	BSTreeNode*  GetRoot() const;
-	BSTreeNode*  ParentFind(Type i_KeyID);
+	BSTreeNode * GetRoot() const;
+	BSTreeNode * ParentFind(Type i_KeyID);
 	void         Insert(Person * i_Person, int & NumComp);
-	void         Delete(BSTreeNode* i_Node, int i_KeyID);
+	void         Delete(BSTreeNode * i_Node, int i_KeyID);
 	void         MakeEmpty(BSTreeNode * i_Root);
 	void         PrintTree();
 	bool         IsEmpty();
-	BSTreeNode * Min(BSTreeNode* i_Node);
-	BSTreeNode * Max(BSTreeNode* i_Node);
+	BSTreeNode * Min(BSTreeNode * i_Node);
+	BSTreeNode * Max(BSTreeNode * i_Node);
 };
 #endif // !BSTree_H

@@ -160,7 +160,7 @@ BSTreeNode * BSTree::Min(BSTreeNode * i_Node)
 	return i_Node;
 }
 
-BSTreeNode * BSTree::Max(BSTreeNode* i_Node)
+BSTreeNode * BSTree::Max(BSTreeNode * i_Node)
 { // return the max value in the tree
 	if(i_Node != nullptr && i_Node->m_Right != nullptr)
 	{
@@ -183,55 +183,3 @@ BSTreeNode * BSTree::GetRoot() const
 {
 	return this->m_Root;
 }
- 
-//void BSTree::Delete(Type i_KeyID);
-//{
-//	BSTreeNode* parentNode = ParentFind(i_KeyID);
-//	BSTreeNode* childNode = Find(i_KeyID);
-//	// maximum one child :
-//	if (childNode->m_ == nullptr && childNode->i_Right != nullptr)
-//	{
-//		if (parent->i_Left == childNode)
-//		{
-//			parent->i_Left = childNode->i_Right;
-//		}
-//		else parent->i_Right = childNode->i_Right;
-//		childNode->i_Right = nullptr;
-//		delete childNode;
-//	}
-//	else if (childNode->i_Right == nullptr && childNode->i_Left != nullptr)
-//	{
-//		if (parent->i_Left == childNode)
-//		{
-//			parent->i_Left = childNode->i_Left;
-//		}
-//		else parent->i_Right = childNode->i_Left;
-//		childNode->i_Left = nullptr;
-//		delete child;
-//	}
-//	else if (childNode->i_Left == nullptr && childNode->i_Right == nullptr)
-//	{
-//		if (parent->i_Left == child)
-//		{
-//			parent->i_Left = nullptr;
-//		}
-//		else parent->i_Right = nullptr;
-//		delete childNode;
-//	}
-//	//two children:
-//	BSTree childTree(childNode->i_Left);
-//	BSTreeNode* maxInChildTree = childTree.Max();
-//	childNode->m_PersonData = maxInChildTree->m_PersonData;
-//	if (maxInChildTree->i_Left == nullptr && maxInChildTree->i_Right != nullptr)
-//	{
-//		maxInChildTree = maxInChildTree->i_Right;
-//	}
-//	else if (maxInChildTree->i_Right == nullptr && maxInChildTree->i_Left != nullptr)
-//	{
-//		maxInChildTree = maxInChildTree->i_Left;
-//	}
-//	else if (maxInChildTree->i_Left == nullptr && maxInChildTree->i_Right == nullptr)
-//	{
-//		delete maxInChildTree;
-//	}
-//}

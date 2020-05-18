@@ -12,13 +12,13 @@ public: //constructors:
 	~List();
 public: // methods:
 	void	   MakeEmpty();
-	void	   InsertAfter(ListNode* i_Node, ListNode* i_NodeToInsertAfter);
-	void	   DeleteNode(ListNode* i_Node);
-	void	   sortedInsert(ListNode* i_NewNode);
+	void	   InsertAfter(ListNode * i_Node, ListNode * i_NodeToInsertAfter);
+	void	   DeleteNode(ListNode * i_Node);
+	void	   sortedInsert(ListNode * i_NewNode);
 	bool	   IsEmpty();
 	ListNode * First();
 	ListNode * Last();
-	ListNode * FindPrevNode(ListNode* i_Node);
+	ListNode * FindPrevNode(ListNode * i_Node);
 	ListNode * FindNode(int i_ID);
 	int		   Size();
 };

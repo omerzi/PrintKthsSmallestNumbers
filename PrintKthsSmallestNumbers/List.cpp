@@ -72,7 +72,7 @@ ListNode * List::FindNode(int i_ID)
 	return nullptr;
 }
 
-void List::InsertAfter(ListNode * i_Node, ListNode* i_NodeToInsertAfter)
+void List::InsertAfter(ListNode * i_Node, ListNode * i_NodeToInsertAfter)
 {
 	if(IsEmpty())
 	{

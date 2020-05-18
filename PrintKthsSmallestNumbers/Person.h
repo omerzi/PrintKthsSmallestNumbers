@@ -8,7 +8,7 @@ private: // members:
 	int			 m_ID;
 	string       m_Name;
 public: // c'tor:
-	Person(int i_ID, string i_Name);
+	Person(int i_ID, const string & i_Name);
 public: //methods:
 	int      GetID() const;
 	string & GetName();
