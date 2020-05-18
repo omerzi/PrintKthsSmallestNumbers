@@ -1,7 +1,7 @@
 #ifndef __LIST_H
 #define __LIST_H
 #include "ListNode.h"
-
+class Person;
 class List
 {
 private: //members:
@@ -16,10 +16,11 @@ public: // methods:
 	ListNode * First();
 	ListNode * Last();
 	ListNode * FindPrevNode(ListNode* i_Node);
-	ListNode * FindNode(int i_Data);
+	ListNode * FindNode(int i_ID);
 	void   InsertAfter(ListNode* i_Node, ListNode* i_NodeToInsertAfter);
 	void   DeleteNode(ListNode* i_Node);
 	int    Size();
+	void sortedInsert(ListNode* i_newNode);
 };
 #endif // !__LIST_H
 

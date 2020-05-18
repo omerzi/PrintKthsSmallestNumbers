@@ -56,12 +56,12 @@ ListNode * List::FindPrevNode(ListNode * i_Node)
 	return nullptr;
 }
 
-ListNode * List::FindNode(int i_Data)
+ListNode * List::FindNode(int i_ID)
 {
 	ListNode * currentNode = this->m_Head;
 	while (currentNode)
 	{
-		if (currentNode->m_ComputerName == i_Data)
+		if (currentNode->m_PersonData->GetID() == i_ID)
 		{
 			return currentNode;
 		}
@@ -88,6 +88,7 @@ void List::InsertAfter(ListNode * i_Node, ListNode* i_NodeToInsertAfter)
 		}
 	}
 }
+
 
 void List::DeleteNode(ListNode * i_Node)
 {
@@ -122,3 +123,37 @@ int List::Size()
 	}
 	return listSize;
 }
+
+void List::sortedInsert(ListNode * i_newNode)
+{
+	ListNode* current;
+	int inputPersonID = i_newNode->GetPerson()->GetID();
+	if (this->m_Head == NULL || m_Head->GetPerson()->GetID() >= inputPersonID)
+	{
+		if (m_Head == NULL)
+		{
+			this->m_Tail = i_newNode;
+		}
+		i_newNode->m_NextNode = m_Head;
+		this->m_Head = i_newNode;
+		
+		
+	}
+	else
+	{
+		current = m_Head;
+		while (current->GetNextListNode() != NULL && current->GetNextListNode()->GetPerson()->GetID() < inputPersonID)
+		{
+			current = current->GetNextListNode();
+		}
+		i_newNode->m_NextNode = current->GetNextListNode();
+		current->m_NextNode = i_newNode;
+		if (i_newNode->GetNextListNode() == nullptr)
+		{
+			m_Tail = i_newNode;
+		}
+	}
+}
+
+
+

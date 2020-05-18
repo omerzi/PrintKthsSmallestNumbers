@@ -1,6 +1,7 @@
 #include "BSTree.h"
 #include "BSTreeNode.h"
 #include "Person.h"
+#include <iostream>
 
 BSTreeNode * BSTree::Find(Type i_KeyID)
 { //find the node of by the type given

@@ -1,8 +1,8 @@
 #include "ListNode.h"
 
-ListNode::ListNode(int i_ComputerName, ListNode* i_NextNode)
+ListNode::ListNode(Person * i_PersonData, ListNode* i_NextNode)
 {
-	this->m_ComputerName = i_ComputerName;
+	this->m_PersonData = i_PersonData;
 	this->m_NextNode = i_NextNode;
 }
 
@@ -10,9 +10,9 @@ ListNode::~ListNode()
 {
 }
 
-int ListNode::GetCompNumber() const
+Person * ListNode::GetPerson() const
 {
-	return this->m_ComputerName;
+	return this->m_PersonData;
 }
 
 ListNode * ListNode::GetNextListNode()

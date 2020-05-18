@@ -1,16 +1,17 @@
 #ifndef __LISTNODE_H
 #define __LISTNODE_H
+#include "Person.h"
 class ListNode {
      friend class List;
 private://members:
-     int       m_ComputerName;
+     Person *  m_PersonData;
      ListNode* m_NextNode;
 public: //constructors:
      ListNode() = default;
-     ListNode(int i_ComputerName, ListNode* i_NextNode = nullptr);
+     ListNode(Person * i_PersonData, ListNode * i_NextNode = nullptr);
      ~ListNode();
 public://methods:
-     int       GetCompNumber() const;
+     Person *       GetPerson() const;
      ListNode *    GetNextListNode();
 };
 #endif 
