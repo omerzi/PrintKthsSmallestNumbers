@@ -15,7 +15,8 @@
 // -----------------------------------------------------------------------------//
 
 int main()
-{
+{cout hi
+
 	Person * n1 = new Person(1,"n1");
 	Person * n2 = new Person(2, "n2");
 	Person * n3 = new Person(3, "n3");
