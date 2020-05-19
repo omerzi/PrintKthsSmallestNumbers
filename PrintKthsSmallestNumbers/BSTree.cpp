@@ -30,13 +30,12 @@ void BSTree::Insert(Person * i_Person, int & NumComp)
 	}
 	else
 	{
-		BSTreeNode* currentNode = this->m_Root;
-		BSTreeNode* parentNode = nullptr;
-		BSTreeNode* newNode;
+		BSTreeNode * currentNode = this->m_Root;
+		BSTreeNode * parentNode = nullptr;
+		BSTreeNode * newNode;
 		while(currentNode != nullptr)
 		{
 			parentNode = currentNode;
-
 			NumComp++; // a comparsion made
 			if(i_Person->GetID() < currentNode->m_PersonData->GetID())
 			{
@@ -49,9 +48,9 @@ void BSTree::Insert(Person * i_Person, int & NumComp)
 		}
 
 		newNode = new BSTreeNode(i_Person, nullptr, nullptr);
-		NumComp++; // a comparsion made
 		if(parentNode == nullptr) // insert newNode as root
 		{
+			NumComp++; // a comparsion made
 			this->m_Root = newNode;
 		}
 		else if(i_Person->GetID() < parentNode->m_PersonData->GetID())

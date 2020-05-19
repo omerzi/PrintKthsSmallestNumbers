@@ -25,7 +25,7 @@ void List::MakeEmpty()
 
 bool List::IsEmpty()
 {
-	if (this->m_Head == nullptr)
+	if(this->m_Head == nullptr)
 	{
 		return true;
 	}
@@ -127,10 +127,11 @@ int List::Size()
 	return listSize;
 }
 
-void List::sortedInsert(ListNode * i_NewNode)
+void List::SortedInsert(ListNode * i_NewNode, int & i_NumComp)
 {
-	ListNode* current;
+	ListNode * current;
 	int inputPersonID = i_NewNode->GetPerson()->GetID();
+	i_NumComp++; // comparsion made
 	if(this->m_Head == NULL || m_Head->GetPerson()->GetID() >= inputPersonID)
 	{
 		if(m_Head == NULL)
@@ -144,14 +145,19 @@ void List::sortedInsert(ListNode * i_NewNode)
 	else
 	{
 		current = m_Head;
-		while(current->GetNextListNode() != NULL && current->GetNextListNode()->GetPerson()->GetID() < inputPersonID)
+		i_NumComp++; // comparsion made for the first iteration
+		while(current->GetNextListNode() != nullptr && current->GetNextListNode()->GetPerson()->GetID() < inputPersonID)
 		{
+			if (current != m_Head)
+			{
+				i_NumComp++; // comparsion made for the 2 iteration and so on.
+			}
 			current = current->GetNextListNode();
 		}
 
 		i_NewNode->m_NextNode = current->GetNextListNode();
 		current->m_NextNode = i_NewNode;
-		if (i_NewNode->GetNextListNode() == nullptr)
+		if(i_NewNode->GetNextListNode() == nullptr)
 		{
 			m_Tail = i_NewNode;
 		}

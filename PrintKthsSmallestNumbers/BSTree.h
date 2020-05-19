@@ -11,7 +11,7 @@ private: //members:
 	BSTreeNode * m_Root;
 public: //c'tors:
 	BSTree() {this->m_Root = nullptr; };
-	BSTree(BSTreeNode * i_Root) { this->m_Root = i_Root; };
+	BSTree(BSTreeNode * i_Root) {this->m_Root = i_Root; };
 
 public: //methods
 	BSTreeNode * Find(Type i_KeyID);

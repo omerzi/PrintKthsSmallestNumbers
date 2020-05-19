@@ -12,7 +12,7 @@ int Person::GetID() const
 	return this->m_ID;
 }
 
-string & Person::GetName()
+string & Person::GetName() 
 {
 	return this->m_Name;
 }
