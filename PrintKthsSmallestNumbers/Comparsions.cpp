@@ -15,7 +15,7 @@ Comparsions::Comparsions(int i_ArraySize)
 
 Comparsions::~Comparsions()
 {
-	for (int i = 0; i < m_ArraySize; i++)
+	for(int i = 0; i < m_ArraySize; i++)
 	{
 		delete m_PersonArray[i];
 	}
@@ -30,7 +30,7 @@ void Comparsions::ReadPersons()
 	cin >> personArraySize;
 	Comparsions instance(personArraySize);
 	cout << "enter id and then name" << endl;
-	for (int i = 0; i < personArraySize; i++)
+	for(int i = 0; i < personArraySize; i++)
 	{
 		cin >> ID;
 		getline(cin, name);
@@ -46,7 +46,7 @@ void Comparsions::RunComparsions(Person ** i_PersonArray, int i_ArraySize, int k
 {
 	//cout << "NaivePrint: " << NaivePrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
 	cout << "BSTPrint: " << BSTPrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
-	//cout << "PrintBySort: " << PrintBySort(i_PersonArray, i_ArraySize, k) << " comparsions" << endl; 
+	cout << "PrintBySort: " << PrintBySort(i_PersonArray, i_ArraySize, k) << " comparsions" << endl; 
 }
 
 int Comparsions::BSTPrint(Person ** i_PersonArray, int n, int k)
@@ -57,7 +57,26 @@ int Comparsions::BSTPrint(Person ** i_PersonArray, int n, int k)
 	{
 		binarySearchTree.Insert(i_PersonArray[i], numComp); //creating the BST from the array
 	}
+
 	binarySearchTree.PrintTreeByKey(k, numComp);
+	return numComp;
+}
+
+int Comparsions::PrintBySort(Person ** i_PersonArray, int n, int k)
+{
+	int numComp = 0, i = 0;
+	Quicksort(i_PersonArray, 0, n - 1, numComp);
+	numComp++;
+	while(i_PersonArray[i]->GetID() < k && i < n)
+	{
+		if (i != 0)
+		{
+			numComp++;
+		}
+		cout << i_PersonArray[i]->GetID() << " " << i_PersonArray[i]->GetName() << endl;
+		i++;
+	}
+
 	return numComp;
 }
 
@@ -67,7 +86,7 @@ int Comparsions::Partition(Person ** i_PersonArray, int i_StartingIndex, int i_E
 	//The algorithms return the correct position index of the pivot
 	int pivot = i_PersonArray[i_EndingIndex]->GetID();
 	int smallerElement = i_StartingIndex - 1;
-	for(int i = 0; i < i_EndingIndex - 1; i++)
+	for(int i = i_StartingIndex; i < i_EndingIndex; i++)
 	{
 		i_NumComp++; //comparsion made
 		if(i_PersonArray[i]->GetID() <= pivot)

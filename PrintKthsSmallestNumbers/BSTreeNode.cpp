@@ -29,21 +29,21 @@ void BSTreeNode::Inorder()
 
 void BSTreeNode::InorderSmallerThanKey(int i_Key, int & i_NumComp)
 {
-	i_NumComp++;
-	if (this->m_Left != nullptr && this->m_Left->m_PersonData->GetID() <= i_Key)
-	{ // go left side
-		this->m_Left->InorderSmallerThanKey(i_Key, i_NumComp);
-	}
+	if(this->m_PersonData != nullptr)
+	{
+		if(this->m_Left != nullptr)
+		{
+			this->m_Left->InorderSmallerThanKey(i_Key, i_NumComp);
+		}
 
-	i_NumComp++;
-	if (this->m_PersonData->GetID() <= i_Key)
-	{ //print root
-		cout << this->m_PersonData->GetID() << " " << this->m_PersonData->GetName() << endl;
-	}
-
-	i_NumComp++;
-	if (this->m_Right != nullptr && this->m_Right->m_PersonData->GetID() <= i_Key)
-	{ // go right side
-		this->m_Right->InorderSmallerThanKey(i_Key, i_NumComp);
+		i_NumComp++;
+		if (this->m_PersonData->GetID() < i_Key)
+		{
+			cout << this->m_PersonData->GetID() << " " << this->m_PersonData->GetName() << endl;
+		}
+		if (this->m_Right != nullptr)
+		{
+			this->m_Right->InorderSmallerThanKey(i_Key, i_NumComp);
+		}
 	}
 }
