@@ -15,5 +15,6 @@ public: //methods:
 	string & GetName();
 	void     SetID(int i_ID);
 	void     SetName(const string & i_Name);
+	static void	 CheckInputName(const string & i_Name);
 };
 #endif // !PERSON_H

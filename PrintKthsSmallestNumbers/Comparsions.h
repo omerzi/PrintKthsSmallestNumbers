@@ -17,7 +17,7 @@ public: //static methods:
 	static void ReadPersons();
 public: //methods:
     void RunComparsions(Person ** i_PersonArray, int i_ArraySize, int k);
-	//int NaivePrint(Person** i_PersonArray, int n, int k);
+	int NaivePrint(Person** i_PersonArray, int n, int k);
 	int BSTPrint(Person** i_PersonArray, int n, int k);
 	//int PrintBySort(Person** i_PersonArray, int n, int k);
 	int Partition(Person ** i_PersonArray, int i_StartingIndex, int i_EndingIndex, int & i_NumComp);
