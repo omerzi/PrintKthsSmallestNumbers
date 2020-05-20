@@ -21,6 +21,7 @@ public: // methods:
 	ListNode * FindPrevNode(ListNode * i_Node);
 	ListNode * FindNode(int i_ID);
 	int		   Size();
+	void	   PrintList();
 };
 #endif // !__LIST_H
 

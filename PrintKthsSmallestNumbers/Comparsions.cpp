@@ -33,9 +33,18 @@ void Comparsions::ReadPersons()
 	for(int i = 0; i < personArraySize; i++)
 	{
 		cin >> ID;
+		for (int j = 0; i < j; j++)
+		{
+			if (ID == instance.m_PersonArray[i]->GetID())
+			{
+				cout << "invaild input" << endl;
+				exit(1);
+			}
+		}
+		getchar();
 		getline(cin, name);
+		Person::CheckInputName(name);
 		instance.m_PersonArray[i] = new Person(ID, name);
-		//checkInput(ID,name) check space between first and last name
 	}
 	cout << "Enter the key ID value" << endl;
 	cin >> k;
@@ -44,9 +53,27 @@ void Comparsions::ReadPersons()
 
 void Comparsions::RunComparsions(Person ** i_PersonArray, int i_ArraySize, int k)
 {
-	//cout << "NaivePrint: " << NaivePrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
+	cout << "NaivePrint: " << NaivePrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
 	cout << "BSTPrint: " << BSTPrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
 	cout << "PrintBySort: " << PrintBySort(i_PersonArray, i_ArraySize, k) << " comparsions" << endl; 
+}
+
+int Comparsions::NaivePrint(Person ** i_PersonArray, int n, int k)
+{
+	List personIdLessThenKey;
+	int numComp = 0;
+	for (int i = 0; i < n; i++)
+	{
+		int currentPersonId = i_PersonArray[i]->GetID();
+		if (currentPersonId < k)
+		{
+			numComp++;
+			ListNode * currentPersonNode = new ListNode(i_PersonArray[i]);
+			personIdLessThenKey.SortedInsert(currentPersonNode, numComp);
+		}
+	}
+	personIdLessThenKey.PrintList();
+	return numComp;
 }
 
 int Comparsions::BSTPrint(Person ** i_PersonArray, int n, int k)

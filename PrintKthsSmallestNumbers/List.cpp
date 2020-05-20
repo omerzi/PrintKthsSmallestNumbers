@@ -1,5 +1,5 @@
 #include "List.h"
-
+#include <iostream>
 List::List()
 {
 	MakeEmpty();
@@ -125,6 +125,16 @@ int List::Size()
 		currentNode = currentNode->m_NextNode;
 	}
 	return listSize;
+}
+
+void List::PrintList()
+{
+	ListNode *currentNode = this->m_Head;
+	while (currentNode != nullptr)
+	{
+		cout << currentNode->GetPerson()->GetID() << " " << currentNode->GetPerson()->GetName()<<" "<<endl;
+		currentNode = currentNode->GetNextListNode();
+	}
 }
 
 void List::SortedInsert(ListNode * i_NewNode, int & i_NumComp)
