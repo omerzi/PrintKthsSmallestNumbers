@@ -3,6 +3,12 @@
 #include "Person.h"
 #include <iostream>
 
+BSTree::~BSTree()
+{
+	//call recurisve delete method:
+	Dispose(m_Root);
+}
+
 BSTreeNode * BSTree::Find(Type i_KeyID)
 { //find the node of by the type given
 	BSTreeNode * currentNode = this->m_Root;
@@ -21,9 +27,9 @@ BSTreeNode * BSTree::Find(Type i_KeyID)
 	return currentNode;
 }
 
-void BSTree::Insert(Person * i_Person, int & NumComp)
+void BSTree::Insert(Person * i_Person, int & i_NumComp)
 {
-	NumComp++; // a comparsion made
+	i_NumComp++; // a comparsion made
 	if(this->Find(i_Person->GetID()) != nullptr)
 	{
 		cout << "Error: key already exists" << endl;
@@ -36,7 +42,7 @@ void BSTree::Insert(Person * i_Person, int & NumComp)
 		while(currentNode != nullptr)
 		{
 			parentNode = currentNode;
-			NumComp++; // a comparsion made
+			i_NumComp++; // a comparsion made
 			if(i_Person->GetID() < currentNode->m_PersonData->GetID())
 			{
 				currentNode = currentNode->m_Left;
@@ -50,17 +56,17 @@ void BSTree::Insert(Person * i_Person, int & NumComp)
 		newNode = new BSTreeNode(i_Person, nullptr, nullptr);
 		if(parentNode == nullptr) // insert newNode as root
 		{
-			NumComp++; // a comparsion made
+			i_NumComp++; // a comparsion made
 			this->m_Root = newNode;
 		}
 		else if(i_Person->GetID() < parentNode->m_PersonData->GetID())
 		{
-			NumComp++; // a comparsion made
+			i_NumComp++; // a comparsion made
 			parentNode->m_Left = newNode; //insert newNode as left child
 		}
 		else
 		{
-			NumComp++; // a comparsion made
+			i_NumComp++; // a comparsion made
 			parentNode->m_Right = newNode; // insert newNode as right child
 		}
 	}
@@ -175,6 +181,24 @@ void BSTree::PrintTree()
 	if(this->m_Root != nullptr)
 	{
 		this->m_Root->Inorder();
+	}
+}
+
+void BSTree::Dispose(BSTreeNode* i_Root)
+{
+	if (i_Root != nullptr)
+	{
+		Dispose(i_Root->m_Left);
+		Dispose(i_Root->m_Right);
+		delete i_Root;
+	}
+}
+
+void BSTree::PrintTreeByKey(int i_Key, int & i_NumComp)
+{
+	if(this->m_Root != nullptr)
+	{
+		this->m_Root->InorderSmallerThanKey(i_Key, i_NumComp);
 	}
 }
 

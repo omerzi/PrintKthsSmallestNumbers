@@ -9,6 +9,7 @@ private: // members:
 	string       m_Name;
 public: // c'tor:
 	Person(int i_ID, const string & i_Name);
+	~Person();
 public: //methods:
 	int      GetID() const;
 	string & GetName();

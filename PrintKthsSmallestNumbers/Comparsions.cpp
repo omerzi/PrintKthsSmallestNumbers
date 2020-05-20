@@ -7,43 +7,57 @@ using namespace std;
 #include "Person.h"
 #include "List.h"
 
+Comparsions::Comparsions(int i_ArraySize)
+{
+	this->m_ArraySize = i_ArraySize;
+	this->m_PersonArray = new Person * [i_ArraySize];
+}
+
+Comparsions::~Comparsions()
+{
+	for (int i = 0; i < m_ArraySize; i++)
+	{
+		delete m_PersonArray[i];
+	}
+	delete [] m_PersonArray;
+}
+
 void Comparsions::ReadPersons()
 {
 	string name;
 	int ID, personArraySize, k;
 	cout << "Enter number of persons:" << endl;
 	cin >> personArraySize;
-	Person ** personArray = new Person * [personArraySize];
+	Comparsions instance(personArraySize);
 	cout << "enter id and then name" << endl;
 	for (int i = 0; i < personArraySize; i++)
 	{
 		cin >> ID;
 		getline(cin, name);
+		instance.m_PersonArray[i] = new Person(ID, name);
 		//checkInput(ID,name) check space between first and last name
-		personArray[i] = new Person(ID, name);
 	}
-
 	cout << "Enter the key ID value" << endl;
 	cin >> k;
-	RunComparsions(personArray, personArraySize, k);
+	instance.RunComparsions(instance.m_PersonArray, personArraySize, k);
 }
 
-void Comparsions::RunComparsions(Person** i_PersonArray, int i_ArraySize, int k)
+void Comparsions::RunComparsions(Person ** i_PersonArray, int i_ArraySize, int k)
 {
 	//cout << "NaivePrint: " << NaivePrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
 	cout << "BSTPrint: " << BSTPrint(i_PersonArray, i_ArraySize, k) << " comparsions" << endl;
 	//cout << "PrintBySort: " << PrintBySort(i_PersonArray, i_ArraySize, k) << " comparsions" << endl; 
 }
 
-int Comparsions::BSTPrint(Person** i_PersonArray, int n, int k)
+int Comparsions::BSTPrint(Person ** i_PersonArray, int n, int k)
 {
 	int numComp = 0;
 	BSTree binarySearchTree;
-	for (int i = 0; i < n; i++)
+	for(int i = 0; i < n; i++)
 	{
-		binarySearchTree.Insert(i_PersonArray[i], numComp);
+		binarySearchTree.Insert(i_PersonArray[i], numComp); //creating the BST from the array
 	}
-	//binarySearchTree.PrintKthsSmallestInorder();
+	binarySearchTree.PrintTreeByKey(k, numComp);
 	return numComp;
 }
 

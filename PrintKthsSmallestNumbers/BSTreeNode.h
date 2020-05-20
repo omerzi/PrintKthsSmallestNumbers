@@ -14,5 +14,6 @@ public: // c'tor
 public: // methods:
 	Person * GetData() const;
 	void     Inorder();
+	void	 InorderSmallerThanKey(int i_Key, int & i_NumComp);
 };
 #endif // !BSTreeNode_H#

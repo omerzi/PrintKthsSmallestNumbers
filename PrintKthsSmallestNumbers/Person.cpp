@@ -7,6 +7,10 @@ Person::Person(int i_ID, const string & i_Name)
 	this->m_Name = i_Name;
 }
 
+Person::~Person()
+{
+}
+
 int Person::GetID() const
 {
 	return this->m_ID;
