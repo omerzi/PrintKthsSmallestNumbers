@@ -1,6 +1,8 @@
 #include "Person.h"
 #pragma warning(disable:4996)
 #include <iostream>
+#include <string.h>
+#include <string>
 
 Person::Person(int i_ID, const string & i_Name)
 {
@@ -35,21 +37,16 @@ void Person::SetName(const string & i_Name)
 
 void Person::CheckInputName(const string & i_Name)
 {
-	int personLengthName = i_Name.length;
+	int personLengthName = i_Name.length();
 	int spaceCounter = 0;
 	for (int j = 0; j < personLengthName; j++)
 	{
-		if (i_Name[j] < 'A' || i_Name[j] > 'z')
+		if(!(i_Name[j] >= 'a' && i_Name[j] <= 'z' || i_Name[j] >= 'A' && i_Name[j] <= 'Z' || i_Name[j] == ' '))
 		{
 			cout << "invaild input" << endl;
 			exit(1);
 		}
-		if(i_Name[j] < 'a' || i_Name[j] > 'Z')
-		{
-			cout << "invaild input" << endl;
-			exit(1);
-		}
-		if ((j == 0 || j == personLengthName - 1) && i_Name[j] == ' ')
+		if (i_Name[j] == ' ' && (j == 0 || j == personLengthName - 1))
 		{
 			cout << "invaild input" << endl;
 			exit(1);

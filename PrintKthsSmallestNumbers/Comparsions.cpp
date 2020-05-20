@@ -41,6 +41,7 @@ void Comparsions::ReadPersons()
 				exit(1);
 			}
 		}
+		getchar();
 		getline(cin, name);
 		Person::CheckInputName(name);
 		instance.m_PersonArray[i] = new Person(ID, name);
