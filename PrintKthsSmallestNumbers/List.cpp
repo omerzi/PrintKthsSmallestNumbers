@@ -132,7 +132,7 @@ void List::PrintList()
 	ListNode *currentNode = this->m_Head;
 	while (currentNode != nullptr)
 	{
-		cout << currentNode->GetPerson()->GetID() << " " << currentNode->GetPerson()->GetName()<<" "<<endl;
+		cout << currentNode->GetPerson()->GetID() << " " << currentNode->GetPerson()->GetName() << endl;
 		currentNode = currentNode->GetNextListNode();
 	}
 }

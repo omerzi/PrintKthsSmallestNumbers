@@ -33,14 +33,15 @@ void Comparsions::ReadPersons()
 	for(int i = 0; i < personArraySize; i++)
 	{
 		cin >> ID;
-		for (int j = 0; i < j; j++)
+		for(int j = 0; j < i; j++)
 		{
-			if (ID == instance.m_PersonArray[i]->GetID())
+			if(ID == instance.m_PersonArray[j]->GetID())
 			{
 				cout << "invaild input" << endl;
 				exit(1);
 			}
 		}
+
 		getchar();
 		getline(cin, name);
 		Person::CheckInputName(name);
@@ -65,9 +66,9 @@ int Comparsions::NaivePrint(Person ** i_PersonArray, int n, int k)
 	for (int i = 0; i < n; i++)
 	{
 		int currentPersonId = i_PersonArray[i]->GetID();
+		numComp++;
 		if (currentPersonId < k)
 		{
-			numComp++;
 			ListNode * currentPersonNode = new ListNode(i_PersonArray[i]);
 			personIdLessThenKey.SortedInsert(currentPersonNode, numComp);
 		}
@@ -94,7 +95,7 @@ int Comparsions::PrintBySort(Person ** i_PersonArray, int n, int k)
 	int numComp = 0, i = 0;
 	Quicksort(i_PersonArray, 0, n - 1, numComp);
 	numComp++;
-	while(i_PersonArray[i]->GetID() < k && i < n)
+	while (i < n && i_PersonArray[i]->GetID() < k)
 	{
 		if (i != 0)
 		{

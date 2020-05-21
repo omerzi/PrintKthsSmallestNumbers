@@ -30,45 +30,38 @@ BSTreeNode * BSTree::Find(Type i_KeyID)
 void BSTree::Insert(Person * i_Person, int & i_NumComp)
 {
 	i_NumComp++; // a comparsion made
-	if(this->Find(i_Person->GetID()) != nullptr)
+	BSTreeNode * currentNode = this->m_Root;
+	BSTreeNode * parentNode = nullptr;
+	BSTreeNode * newNode;
+	while(currentNode != nullptr)
 	{
-		cout << "Error: key already exists" << endl;
-	}
-	else
-	{
-		BSTreeNode * currentNode = this->m_Root;
-		BSTreeNode * parentNode = nullptr;
-		BSTreeNode * newNode;
-		while(currentNode != nullptr)
+		parentNode = currentNode;
+		i_NumComp++; // a comparsion made
+		if(i_Person->GetID() < currentNode->m_PersonData->GetID())
 		{
-			parentNode = currentNode;
-			i_NumComp++; // a comparsion made
-			if(i_Person->GetID() < currentNode->m_PersonData->GetID())
-			{
-				currentNode = currentNode->m_Left;
-			}
-			else
-			{
-				currentNode = currentNode->m_Right;
-			}
-		}
-
-		newNode = new BSTreeNode(i_Person, nullptr, nullptr);
-		if(parentNode == nullptr) // insert newNode as root
-		{
-			i_NumComp++; // a comparsion made
-			this->m_Root = newNode;
-		}
-		else if(i_Person->GetID() < parentNode->m_PersonData->GetID())
-		{
-			i_NumComp++; // a comparsion made
-			parentNode->m_Left = newNode; //insert newNode as left child
+			currentNode = currentNode->m_Left;
 		}
 		else
 		{
-			i_NumComp++; // a comparsion made
-			parentNode->m_Right = newNode; // insert newNode as right child
+			currentNode = currentNode->m_Right;
 		}
+	}
+
+	newNode = new BSTreeNode(i_Person, nullptr, nullptr);
+	if(parentNode == nullptr) // insert newNode as root
+	{
+		i_NumComp++; // a comparsion made
+		this->m_Root = newNode;
+	}
+	else if(i_Person->GetID() < parentNode->m_PersonData->GetID())
+	{
+		i_NumComp++; // a comparsion made
+		parentNode->m_Left = newNode; //insert newNode as left child
+	}
+	else
+	{
+		i_NumComp++; // a comparsion made
+		parentNode->m_Right = newNode; // insert newNode as right child
 	}
 }
 
